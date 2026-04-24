@@ -1,0 +1,18 @@
+Payment Date,BankLast4,LockBoxID,NAME,Account Number,Invoice Number,Payment Amount,Reference ID,BankPaymentType,Blackline Payment Reference (Allocation ID),Comments (Name)
+1,2,3,,4,5,6,7,8,9,10
+3/26/2026,(Pending),(Pending),"ZIPCAR, INC",,INV00600098, 45.00 ,164768,Lockbox,52,TRAVEL LEISURE C
+3/26/2026,(Pending),(Pending),"ZIPCAR, INC",A00447128,, 5.00 ,164768,Lockbox,52,TRAVEL LEISURE C
+,,,,,,,,,,
+Payment.EffectiveDate,Payment.BankLast4__c,Payment.LockBoxID__c,,use this to pull account ID,, Payment.Amount ,Payment.ReferenceId,Payment.BankPaymentType__c,Payment.BLPaymentRef__c,Payment.Comments
+,,,,(payment.AccountId),, Sum of numbers above ,,,,
+Key:,,,,,,,,,,
+P Record,,,,,,,,,,
+T or A Record,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
