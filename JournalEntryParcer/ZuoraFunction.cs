@@ -28,7 +28,7 @@ public class ZuoraFunction
         if (req.Method == HttpMethods.Get)
         {
             var baseDir = AppContext.BaseDirectory;
-            var samplePath = Path.Combine(baseDir, "Lockbox Test Payment Try 1.txt");
+            var samplePath = Path.Combine(baseDir, "Lockbox Test Payment Try 2.txt");
             if (!File.Exists(samplePath))
                 samplePath = Path.Combine(baseDir, "AA0A15_Zuora_Lockbox_all_data_elements.txt");
             if (!File.Exists(samplePath))

@@ -8,7 +8,7 @@ namespace JournalEntryParcer.Services
         private static readonly string[] Headers = new[]
         {
             "PaymentDate", "BankLast4", "LockBoxID", "Name", "AccountNumber",
-            "InvoiceNumber", "PaymentAmount", "ReferenceID", "BankPaymentType",
+            "InvoiceNumber", "AppliedAmount", "PaymentAmount", "ReferenceID", "BankPaymentType",
             "BlacklinePaymentReference", "Comments", "PaymentType"
         };
 
@@ -23,6 +23,7 @@ namespace JournalEntryParcer.Services
                 {
                     var cah = customerAccount.customerAccountHeader;
                     var (bankPaymentType, bankLast4, lockBoxId) = ParsePaymentType(cah?.paymentType);
+                    var paymentAmount = cah?.creditValue?.ToString("F2") ?? "";
 
                     foreach (var transaction in customerAccount.transactions)
                     {
@@ -33,7 +34,8 @@ namespace JournalEntryParcer.Services
                             name: cah?.paymentName ?? "",
                             accountNumber: cah?.accountNumber ?? "",
                             invoiceNumber: transaction.invoiceNumber ?? "",
-                            paymentAmount: transaction.amountToAllocate?.ToString("F2") ?? "",
+                            appliedAmount: transaction.amountToAllocate?.ToString("F2") ?? "",
+                            paymentAmount: paymentAmount,
                             referenceId: cah?.paymentReference ?? "",
                             bankPaymentType: bankPaymentType,
                             blPaymentRef: cah?.allocationID?.ToString() ?? ""
@@ -49,7 +51,8 @@ namespace JournalEntryParcer.Services
                             name: cah?.paymentName ?? "",
                             accountNumber: cah?.accountNumber ?? "",
                             invoiceNumber: "",
-                            paymentAmount: allocation.creditValue?.ToString("F2") ?? "",
+                            appliedAmount: allocation.creditValue?.ToString("F2") ?? "",
+                            paymentAmount: paymentAmount,
                             referenceId: cah?.paymentReference ?? "",
                             bankPaymentType: bankPaymentType,
                             blPaymentRef: cah?.allocationID?.ToString() ?? ""
@@ -75,8 +78,8 @@ namespace JournalEntryParcer.Services
         }
 
         private string BuildRow(string paymentDate, string bankLast4, string lockBoxId,
-            string name, string accountNumber, string invoiceNumber, string paymentAmount,
-            string referenceId, string bankPaymentType, string blPaymentRef)
+            string name, string accountNumber, string invoiceNumber, string appliedAmount,
+            string paymentAmount, string referenceId, string bankPaymentType, string blPaymentRef)
         {
             return string.Join(",", new[]
             {
@@ -86,6 +89,7 @@ namespace JournalEntryParcer.Services
                 Escape(name),
                 Escape(accountNumber),
                 Escape(invoiceNumber),
+                Escape(appliedAmount),
                 Escape(paymentAmount),
                 Escape(referenceId),
                 Escape(bankPaymentType),
